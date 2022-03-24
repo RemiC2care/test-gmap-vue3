@@ -1,6 +1,11 @@
 <template>
   <div>
-    <button @click="changeCenter">change center</button>
+    <div>
+      <p><strong>Put your Google map api key in src/utils/gmaps.js</strong> </p>
+      <p>When clicking on the map, the previous marker should desappear. But it didn't.</p>
+      <p>The exact same code work well in vue 2</p>
+      <p>in /src/components/GMap.vue line 75 .setMap() function is not working</p>
+    </div>
     <div class="map" ref="map"></div>
   </div>
 </template>
@@ -44,11 +49,12 @@ export default {
   },
   methods: {
     drawMap() {
-      // creating the map object, displaying it in the $el DOM object
+      // creating the map object
       this.map = new this.google.maps.Map(this.$refs["map"], {
         zoom: 16,
         center: this.center,
       });
+      //add event listener on click
       this.map.addListener("click", (event) => {
         console.log("click map", event.latLng);
         this.center = event.latLng;
@@ -56,27 +62,19 @@ export default {
       // center the canvas of the map to the location of the user
       this.map.setCenter(this.center);
     },
-    changeCenter() {
-      this.center = {
-        lat: 3,
-        lng: 3,
-      };
-      console.log(this.center);
-      this.map.setCenter(this.center);
-    },
 
-    // Adds a marker to the map and push to the array
+    // Add a marker to the map 
     addMarker(location) {
       this.marker = new this.google.maps.Marker({
         position: location,
         map: this.map,
       });
     },
-
+    // Hide marker
     clearMarker() {
-      this.marker.setMap(null);
+      this.marker.setMap(null);// <------ THIS ONE IS NOT WORKING -------------
     },
-    // Deletes all markers in the array by removing references to them
+    // Delete marker
     deleteMarkers() {
       this.clearMarker();
       this.marker = null;
