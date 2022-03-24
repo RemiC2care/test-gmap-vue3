@@ -2,7 +2,7 @@
   <div>
     <div>
       <p><strong>Put your Google map api key in src/utils/gmaps.js</strong> </p>
-      <p>When clicking on the map, the previous marker should desappear. But it didn't.</p>
+      <p>When clicking on the map, the previous marker should desappear. But it doesn't.</p>
       <p>The exact same code work well in vue 2</p>
       <p>in /src/components/GMap.vue line 75 .setMap() function is not working</p>
     </div>
